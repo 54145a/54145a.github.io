@@ -1,5 +1,4 @@
 ---
-permalink: /index.html
 ---
 
 # 145a的个人主页
