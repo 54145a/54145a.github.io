@@ -25,6 +25,24 @@
     <div class="container">
         <iframe src="https://dao3.fun/creator"></iframe>
     </div>
+    <script>
+        onload = function () {
+            /**
+             * @type {HTMLIFrameElement}
+             */
+            const iframe = document.getElementsByName("iframe")[0];
+            iframe._src = iframe.src;
+            Object.defineProperty(iframe,"src",{
+                get(){
+                    return iframe._src;
+                },
+                set(value){
+                    location.href = value;
+                    iframe._src = value;
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
