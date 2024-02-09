@@ -26,14 +26,14 @@
 <body>
 
     <div class="container">
-        <iframe src="https://dao3.fun/creator"></iframe>
+        <iframe id="content" src="https://dao3.fun/creator"></iframe>
     </div>
     <script>
         onload = function () {
             /**
              * @type {HTMLIFrameElement}
              */
-            const iframe = document.getElementsByName("iframe")[0];
+            const iframe = document.getElementById("content");
             iframe._src = iframe.src;
             iframe.onload = function () {
                 console.log(iframe.contentWindow.location.href);
