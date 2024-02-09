@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dao3creator</title>
+    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
     <style>
         * {
             margin: 0;
@@ -22,6 +24,7 @@
 </head>
 
 <body>
+
     <div class="container">
         <iframe src="https://dao3.fun/creator"></iframe>
     </div>
@@ -32,9 +35,9 @@
              */
             const iframe = document.getElementsByName("iframe")[0];
             iframe._src = iframe.src;
-            iframe.onload = function(url){
-                alert(url);
-            }
+            iframe.onload = function () {
+                console.log(iframe.contentWindow.location.href);
+            };
         }
     </script>
 </body>
