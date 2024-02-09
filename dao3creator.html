@@ -17,8 +17,8 @@
         html,
         body,
         iframe {
-            width: 1300px;
-            height: 100%;
+            width: 1250px;
+            height: 100%
         }
     </style>
 </head>
@@ -26,19 +26,8 @@
 <body>
 
     <div class="container">
-        <iframe id="content" src="jump.html?to=https%3A%2F%2Fdao3.fun%2Fcreator"></iframe>
+        <iframe id="content" src="https://dao3.fun/creator"></iframe>
     </div>
-    <script>
-        onload = function () {
-            /**
-             * @type {HTMLIFrameElement}
-             */
-            let iframe = document.getElementById("content");
-            iframe.contentWindow.onload = function () {
-                console.log(iframe.contentWindow.location.href);
-            };
-        }
-    </script>
 </body>
 
 </html>
