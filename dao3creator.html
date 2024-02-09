@@ -34,7 +34,6 @@
              * @type {HTMLIFrameElement}
              */
             const iframe = document.getElementById("content");
-            iframe._src = iframe.src;
             iframe.onload = function () {
                 console.log(iframe.contentWindow.location.href);
             };
