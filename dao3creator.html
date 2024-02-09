@@ -32,15 +32,9 @@
              */
             const iframe = document.getElementsByName("iframe")[0];
             iframe._src = iframe.src;
-            Object.defineProperty(iframe,"src",{
-                get(){
-                    return iframe._src;
-                },
-                set(value){
-                    location.href = value;
-                    iframe._src = value;
-                }
-            });
+            iframe.onload = function(url){
+                alert(url);
+            }
         }
     </script>
 </body>
