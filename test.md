@@ -4,11 +4,9 @@
         padding: 0;
     }
 
-    html,
-    body,
     iframe {
         width: 1201px;
-        height: 95%
+        height: 200px
     }
 
     iframe {
