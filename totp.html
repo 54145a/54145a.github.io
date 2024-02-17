@@ -10,5 +10,16 @@
 <body>
     <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/buffer.js"></script>
     <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/index.js"></script>
+    这是145a的TOTP客户端，用于Github的2FA身份认证，使用otplib库，所有运算均在浏览器内进行。
+    Secret: <input type="text" id="secret"><br>
+    <button id="generate" onclick="getCode()">获取验证码</button>
+    <code id="code"></code>
+    <script>
+        function getCode(){
+            const code = document.getElementById("code");
+            const secret = document.getElementById("secret");
+            code.innerText = totp.generate(secret.value);
+        }
+    </script>
 </body>
 </html>
