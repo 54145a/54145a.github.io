@@ -18,7 +18,7 @@
         function getCode(){
             const code = document.getElementById("code");
             const secret = document.getElementById("secret");
-            code.innerText = otplib.totp.generate(secret.value);
+            code.innerText = otplib.authenticator.generate(secret.value);
         }
     </script>
 </body>
