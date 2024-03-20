@@ -40,7 +40,6 @@ function createStorageObject(defaultValue, updator) {
 
 function getStorage(name) {
     const defaultValue = localStorage.getItem(name);
-    console.log(name, defaultValue);
     return createStorageObject(
         defaultValue ? JSON.parse(defaultValue) : {},
         (data) => {
