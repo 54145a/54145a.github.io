@@ -42,7 +42,7 @@ function getStorage(name) {
     const defaultValue = localStorage.getItem(name);
     return createStorageObject(
         defaultValue ? JSON.parse(defaultValue) : {},
-        (data) => {
+        async(data) => {
             localStorage.setItem(name, JSON.stringify(data));
         }
     );
