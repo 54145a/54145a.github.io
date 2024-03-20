@@ -42,10 +42,18 @@ function getStorage(name) {
     const defaultValue = localStorage.getItem(name);
     return createStorageObject(
         defaultValue ? JSON.parse(defaultValue) : {},
-        async(data) => {
+        async (data) => {
             localStorage.setItem(name, JSON.stringify(data));
         }
     );
+}
+if (new URLSearchParams(location.search).get("eruda")) {
+    let script = document.createElement('script');
+    script.src = "//cdn.bootcdn.net/ajax/libs/eruda/3.0.1/eruda.min.js";
+    document.body.append(script);
+    script.onload = function () {
+        eruda.init();
+    };
 }
 
 Object.assign(globalThis, {
