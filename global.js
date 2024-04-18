@@ -52,7 +52,7 @@ function loadEruda() {
     if (new URLSearchParams(location.search).get("eruda")) {
         let script = document.createElement('script');
         script.src = "//cdn.bootcdn.net/ajax/libs/eruda/3.0.1/eruda.min.js";
-        document.body.appendChild(script);
+        document.body.append(script);
         script.onload = function () {
             globalThis.eruda.init();
         };
