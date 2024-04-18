@@ -47,15 +47,18 @@ function getStorage(name) {
         }
     );
 }
-if (new URLSearchParams(location.search).get("eruda")) {
-    let script = document.createElement('script');
-    script.src = "//cdn.bootcdn.net/ajax/libs/eruda/3.0.1/eruda.min.js";
-    document.body.append(script);
-    script.onload = function () {
-        eruda.init();
-    };
+
+function loadEruda() {
+    if (new URLSearchParams(location.search).get("eruda")) {
+        let script = document.createElement('script');
+        script.src = "//cdn.bootcdn.net/ajax/libs/eruda/3.0.1/eruda.min.js";
+        document.body.appendChild(script);
+        script.onload = function () {
+            if (!globalThis.eruda) throw "Eruda加载失败";
+            globalThis.eruda.init();
+        };
+    }
 }
 
-Object.assign(globalThis, {
-    getStorage
-});
+globalThis.getStorage = getStorage;
+loadEruda();
