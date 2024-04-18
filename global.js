@@ -54,7 +54,6 @@ function loadEruda() {
         script.src = "//cdn.bootcdn.net/ajax/libs/eruda/3.0.1/eruda.min.js";
         document.body.appendChild(script);
         script.onload = function () {
-            if (!globalThis.eruda) throw "Eruda加载失败";
             globalThis.eruda.init();
         };
     }
