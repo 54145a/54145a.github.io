@@ -37,7 +37,6 @@ function createStorageObject(defaultValue, updator) {
         }
     );
 }
-
 function getStorage(name) {
     const defaultValue = localStorage.getItem(name);
     return createStorageObject(
@@ -49,9 +48,9 @@ function getStorage(name) {
 }
 
 function loadEruda() {
-    if (new URLSearchParams(location.search).get("eruda")) {
-        let script = document.createElement('script');
-        script.src = "//cdn.bootcdn.net/ajax/libs/eruda/3.0.1/eruda.min.js";
+    if (/eruda=1/.test(location.search)) {
+        const script = document.createElement('script');
+        script.src = "https://cdn.bootcdn.net/ajax/libs/eruda/3.0.1/eruda.min.js";
         document.body.append(script);
         script.onload = function () {
             globalThis.eruda.init();
@@ -59,5 +58,6 @@ function loadEruda() {
     }
 }
 
-globalThis.getStorage = getStorage;
 loadEruda();
+
+export { getStorage };
