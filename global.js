@@ -1,4 +1,3 @@
-"use strict";
 
 const UPDATE_MIN_INTERVAL = 1000;
 
