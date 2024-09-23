@@ -49,7 +49,7 @@ function getStorage(name) {
 function loadEruda() {
     if (/eruda=1/.test(location.search)) {
         const script = document.createElement('script');
-        script.src = "https://cdn.bootcdn.net/ajax/libs/eruda/3.0.1/eruda.min.js";
+        script.src = "https://cdn.bootcdn.net/ajax/libs/eruda/3.3.0/eruda.min.js";
         document.body.append(script);
         script.onload = function () {
             globalThis.eruda.init();
