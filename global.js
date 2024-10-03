@@ -45,7 +45,7 @@ function getStorage(name) {
         }
     );
 }
-
+/*
 function loadEruda() {
     if (/eruda=1/.test(location.search)) {
         const script = document.createElement('script');
@@ -56,7 +56,7 @@ function loadEruda() {
         };
     }
 }
-
+*/
 loadEruda();
 
 export { getStorage };
