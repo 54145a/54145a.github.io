@@ -56,7 +56,7 @@ function loadEruda() {
         };
     }
 }
-*/
 loadEruda();
+*/
 
 export { getStorage };
