@@ -44,7 +44,7 @@
         });
         document.getElementById("deleteWordButton").addEventListener("click", function () {
             const word = wordInput.value;
-            if (!word || !confirm(`Do you want delete "${word}"? This can't be undo.`)) return;
+            if (!word || !confirm(`Do you want delete "${word}"? This can't be undone.`)) return;
             if (!storage.wordList.includes(word)) {
                 alert(`No such word in list; "${word}"`);
                 return;
