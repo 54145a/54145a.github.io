@@ -2,68 +2,77 @@
 <html lang="zh">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        main {
-            text-align: center;
-            word-break: break-all;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /*main {
+      text-align: center;
+      word-break: break-all;
+    }
 
-        #wordList>a {
-            display: block;
-        }
-    </style>
-    <title>English Learning Tool</title>
+    #wordList>a {
+      display: block;
+    }*/
+  </style>
+  <title>English Learning Tool</title>
 </head>
 
 <body>
-    <main>
-        <div id="edit">
-            <input type="text" id="wordInput" placeholder="Input word" />
-            <button id="addWordButton">add</button>
-            <button id="deleteWordButton">delete</button>
-        </div>
-        <div id="wordList">
-        </div>
-    </main>
-    <script type="module">
-        "use strict";
-        import { getStorage } from "./global.js";
-        const storage = getStorage("englishLearningTool");
-        const wordInput = document.getElementById("wordInput");
-        const wordList = document.getElementById("wordList");
-        if (!storage.wordList) storage.wordList = storage.wordQueue ?? [];
-        document.getElementById("addWordButton").addEventListener("click", function () {
-            const word = wordInput.value;
-            if (!word) return;
-            storage.wordList.unshift(word);
-            wordInput.value = "";
-            alert(`Added "${word}".`);
-            refreshWordList();
-        });
-        document.getElementById("deleteWordButton").addEventListener("click", function () {
-            const word = wordInput.value;
-            if (!word || !confirm(`Do you want delete "${word}"? This can't be undone.`)) return;
-            if (!storage.wordList.includes(word)) {
-                alert(`No such word in list; "${word}"`);
-                return;
-            }
-            storage.wordList.splice(storage.wordList.indexOf(wordInput.value), 1);
-            refreshWordList();
-        });
-        function refreshWordList() {
-            wordList.innerHTML = "";
-            for (const word of storage.wordList) {
-                const a = document.createElement("a");
-                a.href = `//www.iciba.com/word?w=${word}`;
-                a.target = "_blank";
-                a.textContent = word;
-                wordList.appendChild(a);
-            }
-        }
-        refreshWordList();
-    </script>
+  <main>
+    <div id="edit">
+      <input type="text" id="wordInput" placeholder="Input word" />
+    <button id="addWordButton">add</button>
+    <button id="deleteWordButton">delete</button>
+  </div>
+  <ul id="wordList">
+  </ul>
+</main>
+<script type="module">
+  "use strict";
+  import {
+    getStorage
+  } from "./global.js";
+  const storage = getStorage("englishLearningTool");
+  const wordInput = document.getElementById("wordInput");
+  const wordList = document.getElementById("wordList");
+  if (!storage.wordList) storage.wordList = storage.wordQueue ?? [];
+  document.getElementById("addWordButton").addEventListener("click", function () {
+    const word = wordInput.value;
+    if (!word) return;
+    storage.wordList.unshift(word);
+    wordInput.value = "";
+    alert(`Added "${word}".`);
+    refreshWordList();
+  });
+  document.getElementById("deleteWordButton").addEventListener("click", function () {
+    const word = wordInput.value;
+    if (!word || !confirm(`Do you want delete "${word}"?`)) return;
+    if (!storage.wordList.includes(word)) {
+      alert(`No such word in list; "${word}"`);
+      return;
+    }
+    storage.wordList.splice(storage.wordList.indexOf(wordInput.value), 1);
+    refreshWordList();
+  });
+  function refreshWordList() {
+    wordList.innerHTML = "";
+    /*
+    for (const word of storage.wordList) {
+      const a = document.createElement("a");
+      a.href = `//www.iciba.com/word?w=${word}`;
+      a.target = "_blank";
+      a.textContent = word;
+      wordList.appendChild(a);
+    }
+    */
+  for (const word of storage.wordList) {
+    const item = document.createElement("li");
+    item.textContent = word;
+    wordList.appendChild(item);
+  }
+  }
+  refreshWordList();
+</script>
 </body>
 
 </html>
