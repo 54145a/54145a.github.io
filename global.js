@@ -1,4 +1,3 @@
-//global.js已废弃，将于近期移除
 const UPDATE_MIN_INTERVAL = 1000;
 
 function createDeepProxy(target, handler) {
