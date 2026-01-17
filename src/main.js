@@ -1,24 +1,33 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
-
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
-
-setupCounter(document.querySelector('#counter'))
+const input = document.querySelector("#uploadFile");
+if (!(input instanceof HTMLInputElement)) throw new TypeError();
+const outputWrapper = document.querySelector("#output");
+if (!outputWrapper) throw new TypeError();
+const fileReader = new FileReader();
+/**
+ * @param {FileList} files 
+ */
+async function handleInput(files) {
+    for (const file of files) {
+        await new Promise(resolve => {
+            fileReader.readAsDataURL(file);
+            fileReader.addEventListener("load", resolve, { once: true });
+        });
+        const details = document.createElement("details");
+        details.innerHTML = `<summary>${file.name}<button>Copy</button></summary><code>${fileReader.result}</code>`;
+        const copyButton = details.querySelector("button");
+        if (!copyButton) throw new TypeError();
+        copyButton.addEventListener("click", async () => {
+            await navigator.clipboard.writeText(details.querySelector("code").textContent);
+            copyButton.innerText = "Copied";
+        });
+        outputWrapper.appendChild(details);
+    }
+}
+input.addEventListener("change", async () => {
+    if (!input.files) throw new TypeError();
+    handleInput(input.files);
+});
+document.querySelector("#pasteArea").addEventListener("paste", (event) => {
+    if (!(event instanceof ClipboardEvent)) throw new TypeError();
+    handleInput(event.clipboardData.files);
+});

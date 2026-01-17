@@ -1,13 +1,23 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>convert2base64</title>
-  </head>
-  <body>
-    <div id="app"></div>
+    <style>
+        #output code {
+            word-break: break-all;
+        }
+    </style>
+    <title>Convert to Base64</title>
+</head>
+
+<body>
+    <main>
+        Paste <input id="pasteArea" placeholder="here" /> or <input type="file" id="uploadFile" />
+        <div id="output"></div>
+    </main>
     <script type="module" src="/src/main.js"></script>
-  </body>
+</body>
+
 </html>
