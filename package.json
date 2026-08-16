@@ -16,6 +16,8 @@
         "vite": "^8.2.1"
     },
     "dependencies": {
+        "@jsquash/avif": "^2.1.1",
+        "js-base64": "^3.9.2",
         "preact": "^10.29.8"
     }
 }
