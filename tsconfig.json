@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "preact",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "target": "esnext",
+        "lib": ["esnext", "dom", "dom.iterable"],
+        "noEmit": true,
+        "skipLibCheck": true
+    },
+    "include": ["src"]
+}
