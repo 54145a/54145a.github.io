@@ -86,7 +86,7 @@ function App() {
 		} else {
 			payload = new Uint8Array(await file.arrayBuffer());
 		}
-		return `${location.origin}${location.pathname}?img=${fromUint8Array(payload, true)}`;
+		return `${location.origin}${location.pathname}#img=${fromUint8Array(payload, true)}`;
 	}
 
 	async function handleInput(files: File[]) {
@@ -113,40 +113,50 @@ function App() {
 	}
 
 	useEffect(() => {
-		const img = new URLSearchParams(location.search).get("img");
-		if (img) {
-			const dataUrl = `data:image/avif;base64url,${img}`;
-			setInput(dataUrl);
-			try {
-				setDecoded({ kind: "file", ...dataUrlDecode(dataUrl) });
-				setError(null);
-			} catch (err) {
-				setError(err instanceof Error ? err.message : "Decode failed");
+		function applyShareHash() {
+			const hash = location.hash;
+			if (hash.startsWith("#img=")) {
+				const img = hash.slice("#img=".length);
+				const dataUrl = `data:image/avif;base64url,${img}`;
+				setInput(dataUrl);
+				try {
+					setDecoded({ kind: "file", ...dataUrlDecode(dataUrl) });
+					setError(null);
+				} catch (err) {
+					setError(err instanceof Error ? err.message : "Decode failed");
+				}
 			}
 		}
+		applyShareHash();
+		addEventListener("hashchange", applyShareHash);
+		return () => removeEventListener("hashchange", applyShareHash);
 	}, []);
 
-	return <>
-		<label>
-			Mode{" "}
-			<select value={mode} onChange={e => setMode(e.currentTarget.value as Mode)}>
+	return <div>
+		<div>
+			<label>
+				Mode{" "}
+				<select value={mode} onChange={e => setMode(e.currentTarget.value as Mode)}>
 				<option value="base64">Base64</option>
-				<option value="base64url">Base64 URL</option>
-			</select>
-		</label>
-		<label>Paste file(s) <input id="pasteArea" placeholder="here" onPaste={e => {
-			if (!e.clipboardData) throw new TypeError();
-			if (e.clipboardData.files.length === 0) return;
-			handleInput(Array.from(e.clipboardData.files));
-		}} /> or <input type="file" id="uploadFile" onChange={e => handleInput(Array.from(e.currentTarget.files ?? []))} /></label>
-		<div id="output">
-			{entries.map(entry => <FileEntry key={entry.encodeResult} name={entry.name} result={entry.encodeResult} />)}
+				<option value="base64url">Share link</option>
+				</select>
+			</label>
+			<label>Paste file(s) <input id="pasteArea" placeholder="here" onPaste={e => {
+				if (!e.clipboardData) throw new TypeError();
+				if (e.clipboardData.files.length === 0) return;
+				handleInput(Array.from(e.clipboardData.files));
+			}} /> or <input type="file" id="uploadFile" onChange={e => handleInput(Array.from(e.currentTarget.files ?? []))} /></label>
+			<div id="output">
+				{entries.map(entry => <FileEntry key={entry.encodeResult} name={entry.name} result={entry.encodeResult} />)}
+			</div>
 		</div>
-		<textarea placeholder="Paste base64, data URL, or share link" value={input} onInput={e => setInput(e.currentTarget.value)} />
-		<button onClick={handleDecode}>Decode</button>
-		{error && <p>{error}</p>}
-		{decoded && <DecodeResult decoded={decoded} />}
-	</>;
+		<div>
+			<textarea placeholder="Paste base64, data URL, or share link" value={input} onInput={e => setInput(e.currentTarget.value)} />
+			<button onClick={handleDecode}>Decode</button>
+			{error && <p>{error}</p>}
+			{decoded && <DecodeResult decoded={decoded} />}
+		</div>
+	</div>;
 }
 
 const app = querySelector("div#app");
