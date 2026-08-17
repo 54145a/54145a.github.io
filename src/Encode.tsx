@@ -53,12 +53,11 @@ function CopyButton({ text, label }: { text: string; label: string }) {
 
 function FileEntry({ name, dataUrl, shareUrl }: { name: string; dataUrl: string; shareUrl: string | null }) {
 	return <details>
-		<summary>{name} <CopyButton text={dataUrl} label="Copy Base64" /></summary>
-		{dataUrl.length > 500 ? <p>Too long to display</p> : <code>{dataUrl}</code>}
+		<summary>{name} <CopyButton text={dataUrl} label="Copy Base64" />{shareUrl && <CopyButton text={shareUrl} label="Copy Share URL" />}</summary>
+		{dataUrl.length > 500 ? <p>Too long to display</p> : <code style="word-break:break-all">{dataUrl}</code>}
 		{shareUrl && <>
 			<p>Share URL (image only)</p>
-			<code>{shareUrl}</code>
-			<CopyButton text={shareUrl} label="Copy Share URL" />
+			<code style="word-break:break-all">{shareUrl}</code>
 		</>}
 	</details>;
 }
