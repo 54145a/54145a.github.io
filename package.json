@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build && tsx scripts/prerender.tsx",
+        "build": "vite build && tsx scripts/prerender.tsx && rm -f docs/assets/*.wasm",
         "preview": "vite preview",
         "typecheck": "tsc --noEmit -p tsconfig.json"
     },

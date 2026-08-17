@@ -1,7 +1,11 @@
 import { useState } from "preact/hooks";
 import { fromUint8Array } from "js-base64";
+import { init as initAvif } from "@jsquash/avif/encode.js";
 import { encode as encodeAvif } from "@jsquash/avif";
 import { renderPage } from "./shared";
+
+const WASM_CDN = "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/codec/enc";
+initAvif({ locateFile: (path: string) => `${WASM_CDN}/${path}` });
 
 function fileToDataUrl(file: File): Promise<string> {
 	return new Promise((resolve, reject) => {
