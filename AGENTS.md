@@ -18,6 +18,6 @@ Preact + Vite SPA that converts files (upload or paste) to base64 data URLs and 
 
 ## Conventions
 
-- 4-space indentation, semicolons; Preact with hooks, no other framework. UI strings are Chinese; keep them that way.
+- Tab indentation, semicolons; Preact with hooks, no other framework. UI strings are Chinese; keep them that way.
 - `src/shared.tsx` exports `Nav`, `Footer`. Page components (`IndexPage`, `Encode`, `Decode`) are pure components — no side effects, no `mountApp` calls.
 - Route paths use `.html` extensions to match GitHub Pages static file serving.
