@@ -10,6 +10,7 @@
         "typecheck": "tsc --noEmit -p tsconfig.json"
     },
     "devDependencies": {
+        "@jsquash/avif": "^2.1.1",
         "@keupoz/strict-queryselector": "^1.2.0",
         "@preact/preset-vite": "^2.10.6",
         "@types/node": "^26.2.0",
