@@ -6,10 +6,7 @@ const AVIF_CDN = "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1";
 let avifReady: Promise<typeof import("https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/+esm")> | null = null;
 async function getAvif() {
 	if (!avifReady) {
-		avifReady = import(`${AVIF_CDN}/+esm`).then(mod => {
-			mod.init({ locateFile: (path: string) => `${AVIF_CDN}/codec/enc/${path}` });
-			return mod;
-		});
+		avifReady = import(`${AVIF_CDN}/+esm`);
 	}
 	return avifReady;
 }
