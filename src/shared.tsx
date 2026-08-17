@@ -1,9 +1,10 @@
 import type { VNode } from "preact";
 import { render } from "preact";
-import { querySelector } from "@keupoz/strict-queryselector";
 
-function Nav() {
-	const isEncode = location.pathname.includes("index") || location.pathname === "/";
+export function Nav() {
+	const isEncode = typeof location !== "undefined"
+		? (location.pathname.includes("index") || location.pathname === "/")
+		: true;
 	return <nav>
 		<span>{isEncode ? "Encode" : "Decode"}</span>
 		{" → "}
@@ -13,6 +14,12 @@ function Nav() {
 	</nav>;
 }
 
-export function renderPage(page: VNode) {
-	render(<><Nav />{page}</>, querySelector("div#app"));
+export function App({ children }: { children: VNode }) {
+	return <><Nav />{children}</>;
+}
+
+export async function renderPage(page: VNode) {
+	if (typeof document === "undefined") return;
+	const { querySelector } = await import("@keupoz/strict-queryselector");
+	render(<App>{page}</App>, querySelector("div#app"));
 }

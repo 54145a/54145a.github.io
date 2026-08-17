@@ -55,7 +55,7 @@ function FileEntry({ name, dataUrl, shareUrl }: { name: string; dataUrl: string;
 	</details>;
 }
 
-function EncodePage() {
+export function EncodePage() {
 	const [entries, setEntries] = useState<Encoded[]>([]);
 
 	async function handleInput(files: File[]) {

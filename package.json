@@ -5,13 +5,16 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "vite build && tsx scripts/prerender.tsx",
         "preview": "vite preview",
         "typecheck": "tsc --noEmit -p tsconfig.json"
     },
     "devDependencies": {
         "@keupoz/strict-queryselector": "^1.2.0",
         "@preact/preset-vite": "^2.10.6",
+        "@types/node": "^26.2.0",
+        "preact-render-to-string": "^6.7.0",
+        "tsx": "^4.23.12",
         "typescript": "^7.0.2",
         "vite": "^8.2.1"
     },

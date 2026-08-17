@@ -50,7 +50,7 @@ function DecodeResult({ decoded, onDownload }: { decoded: Decoded; onDownload: (
 	return <FileResult key={decoded.mime} decoded={decoded} onDownload={onDownload} />;
 }
 
-function DecodePage() {
+export function DecodePage() {
 	const [decoded, setDecoded] = useState<Decoded | null>(null);
 	const [input, setInput] = useState("");
 	const [error, setError] = useState<string | null>(null);
