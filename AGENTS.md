@@ -4,21 +4,20 @@ Preact + Vite SPA that converts files (upload or paste) to base64 data URLs and 
 
 ## Commands
 
-- Install with `pnpm install` only. `vite` is a plain devDependency — Vite 8+ uses Rolldown as its default engine, no override/alias needed.
-- `pnpm dev` / `pnpm build` / `pnpm preview` / `pnpm typecheck` are the only scripts. No lint, test, or format tooling exists.
-- Type checking: `pnpm typecheck` runs `tsc --noEmit -p tsconfig.json` (TypeScript 7, the native compiler). App code lives in `src` as `.tsx`/`.ts` with Preact; `tsconfig.json` sets `strict` + `jsx: react-jsx` + `jsxImportSource: preact`. `dist`/`node_modules` fall outside `include: ["src"]`, so the built bundle is never type-checked.
+- Install with `pnpm install` only. Vite 8+ uses Rolldown as its default engine, no override/alias needed.
+- `pnpm dev` / `pnpm build` / `pnpm preview` / `pnpm check` are the only scripts. No lint, test, or format tooling exists.
+- Type checking: `pnpm check` runs `tsc --noEmit` (TypeScript 7, the native compiler). App code lives in `src` as `.tsx`/`.ts` with Preact; `tsconfig.json` sets `strict` + `jsx: react-jsx` + `jsxImportSource: preact`.
+
+## Architecture
+
+- SPA with `preact-iso` router (`LocationProvider` + `Router` + `Route` in `src/App.tsx`).
+- Single entry: `index.html` → `src/index.tsx` → `src/App.tsx`. Routes: `/`, `/encode.html`, `/decode.html`.
+- SSG: `prerender.tsx` uses `locationStub()` + `prerender()` loop to generate `docs/index.html`, `docs/encode.html`, `docs/decode.html` from the single build output.
+- Build output goes to `docs/` (served by GitHub Pages). `public/CNAME` is copied to `docs/` automatically.
+- Simple.css via CDN `<link>` in `index.html`. Rolldown cannot resolve CSS-only npm packages as JS imports.
 
 ## Conventions
 
 - 4-space indentation, semicolons; Preact with hooks, no other framework. UI strings are Chinese; keep them that way.
-
-## Planned refactor (not yet implemented)
-
-Large refactor preserving the base app; during any work, `pnpm typecheck` + `pnpm build` must stay green:
-
-- Switch all UI strings to English.
-- Add an output option to generate a plain Base64 string in addition to the Base64 data URL.
-- Add a decode feature: restore the original file from a Base64 (or Base64 URL) string.
-- Introduce workbox caching (service worker) to reduce server load.
-- Use tabs for indentation where possible.
-- Keep CSS usage minimal; keep code comments to the few truly necessary ones — readability comes from self-evident naming.
+- `src/shared.tsx` exports `Nav`, `Footer`. Page components (`IndexPage`, `Encode`, `Decode`) are pure components — no side effects, no `mountApp` calls.
+- Route paths use `.html` extensions to match GitHub Pages static file serving.
