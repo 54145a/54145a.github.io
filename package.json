@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build && tsx scripts/prerender.tsx && rm -f docs/assets/*.wasm",
+        "build": "vite build && tsx scripts/prerender.tsx",
         "preview": "vite preview",
         "typecheck": "tsc --noEmit -p tsconfig.json"
     },
@@ -19,7 +19,6 @@
         "vite": "^8.2.1"
     },
     "dependencies": {
-        "@jsquash/avif": "^2.1.1",
         "js-base64": "^3.9.2",
         "mime": "^4.1.0",
         "preact": "^10.29.8"

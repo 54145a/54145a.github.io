@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@jsquash/avif':
-        specifier: ^2.1.1
-        version: 2.1.1
       js-base64:
         specifier: ^3.9.2
         version: 3.9.2
@@ -309,9 +306,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
-
-  '@jsquash/avif@2.1.1':
-    resolution: {integrity: sha512-LMRxd0fMgfCLtobDh0/sFYJMMiRJTNYSEEWvRDKXlAeZ08t3gI5V+1thIT0XjXJ+SVG7Zug9B0XPyx0Ti5VRNA==}
 
   '@keupoz/strict-queryselector@1.2.0':
     resolution: {integrity: sha512-zgkaYwcnIIQ0qBulSbqmuhL4A4WNI4t83fPLh8RD5hIvoZHukrtCoG6twrSDRYH5ktaVV1rgXBiQyf00CU4Tig==}
@@ -920,9 +914,6 @@ packages:
       yaml:
         optional: true
 
-  wasm-feature-detect@1.9.0:
-    resolution: {integrity: sha512-zonE+xlIIYtxPy++L24ow0hAD8CICb4+FgPyROd3buyXIqsJvUEDkBgfCCoXOd1Hu3DUr0GOfnPIdcGV+YpNaA==}
-
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
@@ -1156,10 +1147,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
-
-  '@jsquash/avif@2.1.1':
-    dependencies:
-      wasm-feature-detect: 1.9.0
 
   '@keupoz/strict-queryselector@1.2.0':
     dependencies:
@@ -1631,8 +1618,6 @@ snapshots:
       esbuild: 0.28.2
       fsevents: 2.3.3
       tsx: 4.23.12
-
-  wasm-feature-detect@1.9.0: {}
 
   yallist@3.1.1: {}
 

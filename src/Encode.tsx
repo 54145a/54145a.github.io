@@ -1,11 +1,19 @@
 import { useState } from "preact/hooks";
 import { fromUint8Array } from "js-base64";
-import { init as initAvif } from "@jsquash/avif/encode.js";
-import { encode as encodeAvif } from "@jsquash/avif";
 import { renderPage } from "./shared";
 
-const WASM_CDN = "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/codec/enc";
-initAvif({ locateFile: (path: string) => `${WASM_CDN}/${path}` });
+const AVIF_CDN = "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1";
+
+let avifReady: Promise<typeof import("https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/+esm")> | null = null;
+async function getAvif() {
+	if (!avifReady) {
+		avifReady = import(`${AVIF_CDN}/+esm`).then(mod => {
+			mod.init({ locateFile: (path: string) => `${AVIF_CDN}/codec/enc/${path}` });
+			return mod;
+		});
+	}
+	return avifReady;
+}
 
 function fileToDataUrl(file: File): Promise<string> {
 	return new Promise((resolve, reject) => {
@@ -17,6 +25,7 @@ function fileToDataUrl(file: File): Promise<string> {
 }
 
 async function fileToAvifBytes(file: File): Promise<ArrayBuffer> {
+	const { encode } = await getAvif();
 	const bitmap = await createImageBitmap(file);
 	const canvas = document.createElement("canvas");
 	canvas.width = bitmap.width;
@@ -26,7 +35,7 @@ async function fileToAvifBytes(file: File): Promise<ArrayBuffer> {
 	ctx.drawImage(bitmap, 0, 0);
 	const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 	bitmap.close();
-	return encodeAvif(imageData, { quality: 50 });
+	return encode(imageData, { quality: 50 });
 }
 
 async function fileToShareUrl(file: File): Promise<string> {
