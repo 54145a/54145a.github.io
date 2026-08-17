@@ -1,1 +1,0 @@
-function e(e,t){if(t===null)throw Error(`Element "${e}" is not found`)}function t(e,t,n){if(!(t instanceof n))throw TypeError(`Element "${e}" is not ${n.name}`)}function n(n){function r(r,i){let a=n.querySelector(r);return e(r,a),i&&t(r,a,i),a}return r}var r=n(document);export{r as querySelector};

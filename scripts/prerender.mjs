@@ -1,5 +1,5 @@
 import { h, Fragment } from "preact";
-import { renderToString } from "preact-render-to-string";
+import prerender from "preact-iso/prerender";
 import { readFileSync, writeFileSync } from "node:fs";
 import { EncodePage } from "../src/Encode.tsx";
 import { DecodePage } from "../src/Decode.tsx";
@@ -23,23 +23,23 @@ function Nav({ current }) {
 
 const pages = {
 	"/index.html": {
-		component: h(Fragment, null, h(Nav, { current: "index.html" }), h(IndexPage, null)),
+		vnode: h(Fragment, null, h(Nav, { current: "index.html" }), h(IndexPage, null)),
 		title: "54145a's Tools",
 	},
 	"/encode.html": {
-		component: h(Fragment, null, h(Nav, { current: "encode.html" }), h(EncodePage, null)),
+		vnode: h(Fragment, null, h(Nav, { current: "encode.html" }), h(EncodePage, null)),
 		title: "Base64 Converter — Encode",
 	},
 	"/decode.html": {
-		component: h(Fragment, null, h(Nav, { current: "decode.html" }), h(DecodePage, null)),
+		vnode: h(Fragment, null, h(Nav, { current: "decode.html" }), h(DecodePage, null)),
 		title: "Base64 Converter — Decode",
 	},
 };
 
-for (const [path, { component, title }] of Object.entries(pages)) {
+for (const [path, { vnode, title }] of Object.entries(pages)) {
 	const filePath = `docs${path}`;
 	const html = readFileSync(filePath, "utf-8");
-	const ssrContent = renderToString(component);
+	const { html: ssrContent } = await prerender(vnode);
 	const updated = html
 		.replace('<div id="app">', `<div id="app">${ssrContent}`)
 		.replace(/<title>.*?<\/title>/, `<title>${title}</title>`);

@@ -1,4 +1,4 @@
-import { renderPage } from "./shared";
+import { mountApp } from "./shared";
 
 export function IndexPage() {
 	return <div>
@@ -10,4 +10,4 @@ export function IndexPage() {
 	</div>;
 }
 
-renderPage(<IndexPage />);
+mountApp(<IndexPage />);

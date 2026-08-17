@@ -1,5 +1,5 @@
 import type { VNode } from "preact";
-import { hydrate } from "preact";
+import hydrate from "preact-iso/hydrate";
 
 export function Nav() {
 	const path = typeof location !== "undefined" ? location.pathname : "/";
@@ -23,8 +23,7 @@ export function App({ children }: { children: VNode }) {
 	return <><Nav />{children}</>;
 }
 
-export async function renderPage(page: VNode) {
+export function mountApp(page: VNode) {
 	if (typeof document === "undefined") return;
-	const { querySelector } = await import("@keupoz/strict-queryselector");
-	hydrate(<App>{page}</App>, querySelector("div#app"));
+	hydrate(<App>{page}</App>, document.querySelector("#app")!);
 }
