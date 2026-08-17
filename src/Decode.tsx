@@ -1,8 +1,7 @@
-import { render } from "preact";
 import { useEffect, useMemo, useState } from "preact/hooks";
-import { querySelector } from "@keupoz/strict-queryselector";
 import { decode as base64Decode, fromUint8Array, toUint8Array } from "js-base64";
 import mime from "mime";
+import { renderPage } from "./shared";
 
 function base64ToText(input: string): string {
 	return base64Decode(input);
@@ -13,8 +12,8 @@ function dataUrlDecode(input: string): { mime: string; bytes: Uint8Array<ArrayBu
 	if (comma === -1) throw new Error("Invalid data URL");
 	const header = input.slice(0, comma);
 	if (!header.includes(";base64")) throw new Error("Invalid data URL");
-	const mime = header.slice("data:".length).split(";")[0];
-	return { mime, bytes: toUint8Array(input.slice(comma + 1)) as Uint8Array<ArrayBuffer> };
+	const mimeType = header.slice("data:".length).split(";")[0];
+	return { mime: mimeType, bytes: toUint8Array(input.slice(comma + 1)) as Uint8Array<ArrayBuffer> };
 }
 
 type Decoded =
@@ -51,7 +50,7 @@ function DecodeResult({ decoded, onDownload }: { decoded: Decoded; onDownload: (
 	return <FileResult key={decoded.mime} decoded={decoded} onDownload={onDownload} />;
 }
 
-function App() {
+function DecodePage() {
 	const [decoded, setDecoded] = useState<Decoded | null>(null);
 	const [input, setInput] = useState("");
 	const [error, setError] = useState<string | null>(null);
@@ -74,10 +73,10 @@ function App() {
 	function handleDownload(fileName: string) {
 		try {
 			const trimmed = input.trim();
-			const { mime, bytes } = trimmed.startsWith("data:")
+			const { mime: mimeType, bytes } = trimmed.startsWith("data:")
 				? dataUrlDecode(trimmed)
 				: { mime: "text/plain", bytes: new TextEncoder().encode(base64ToText(trimmed)) };
-			const url = URL.createObjectURL(new Blob([bytes], { type: mime }));
+			const url = URL.createObjectURL(new Blob([bytes], { type: mimeType }));
 			const a = document.createElement("a");
 			a.href = url;
 			a.download = fileName;
@@ -116,5 +115,4 @@ function App() {
 	</div>;
 }
 
-const app = querySelector("div#app");
-render(<App />, app);
+renderPage(<DecodePage />);

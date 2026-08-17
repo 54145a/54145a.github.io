@@ -1,8 +1,7 @@
-import { render } from "preact";
 import { useState } from "preact/hooks";
-import { querySelector } from "@keupoz/strict-queryselector";
 import { fromUint8Array } from "js-base64";
 import { encode as encodeAvif } from "@jsquash/avif";
+import { renderPage } from "./shared";
 
 function fileToDataUrl(file: File): Promise<string> {
 	return new Promise((resolve, reject) => {
@@ -56,7 +55,7 @@ function FileEntry({ name, dataUrl, shareUrl }: { name: string; dataUrl: string;
 	</details>;
 }
 
-function App() {
+function EncodePage() {
 	const [entries, setEntries] = useState<Encoded[]>([]);
 
 	async function handleInput(files: File[]) {
@@ -81,5 +80,4 @@ function App() {
 	</div>;
 }
 
-const app = querySelector("div#app");
-render(<App />, app);
+renderPage(<EncodePage />);
