@@ -9,6 +9,7 @@ export function App() {
 		<Nav />
 		<Router>
 			<Route path="/" component={IndexPage} />
+			<Route path="/index.html" component={IndexPage} />
 			<Route path="/encode.html" component={EncodePage} />
 			<Route path="/decode.html" component={DecodePage} />
 		</Router>
