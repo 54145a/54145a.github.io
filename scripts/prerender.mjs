@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { h, Fragment } from "preact";
 import { renderToString } from "preact-render-to-string";
 import { readFileSync, writeFileSync } from "node:fs";
 import { EncodePage } from "../src/Encode.tsx";
@@ -23,15 +23,15 @@ function Nav({ current }) {
 
 const pages = {
 	"/index.html": {
-		component: h(null, null, h(Nav, { current: "index.html" }), h(IndexPage, null)),
+		component: h(Fragment, null, h(Nav, { current: "index.html" }), h(IndexPage, null)),
 		title: "54145a's Tools",
 	},
 	"/encode.html": {
-		component: h(null, null, h(Nav, { current: "encode.html" }), h(EncodePage, null)),
+		component: h(Fragment, null, h(Nav, { current: "encode.html" }), h(EncodePage, null)),
 		title: "Base64 Converter — Encode",
 	},
 	"/decode.html": {
-		component: h(null, null, h(Nav, { current: "decode.html" }), h(DecodePage, null)),
+		component: h(Fragment, null, h(Nav, { current: "decode.html" }), h(DecodePage, null)),
 		title: "Base64 Converter — Decode",
 	},
 };
