@@ -1,15 +1,15 @@
 {
-    "compilerOptions": {
-        "strict": true,
-        "jsx": "react-jsx",
-        "jsxImportSource": "preact",
-        "module": "esnext",
-        "moduleResolution": "bundler",
-        "target": "esnext",
-        "types": ["node"],
-        "lib": ["esnext", "dom", "dom.iterable"],
-        "noEmit": true,
-        "skipLibCheck": true
-    },
-    "include": ["src", "scripts"]
+	"compilerOptions": {
+		"strict": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact",
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"target": "esnext",
+		"types": ["node"],
+		"lib": ["esnext", "dom", "dom.iterable"],
+		"noEmit": true,
+		"skipLibCheck": true
+	},
+	"include": ["src", "scripts"]
 }

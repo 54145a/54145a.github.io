@@ -1,27 +1,27 @@
 {
-    "name": "convert2base64",
-    "private": true,
-    "version": "0.0.0",
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build && tsx scripts/prerender.tsx",
-        "preview": "vite preview",
-        "typecheck": "tsc --noEmit -p tsconfig.json"
-    },
-    "devDependencies": {
-        "@jsquash/avif": "^2.1.1",
-        "@keupoz/strict-queryselector": "^1.2.0",
-        "@preact/preset-vite": "^2.10.6",
-        "@types/node": "^26.2.0",
-        "preact-render-to-string": "^6.7.0",
-        "tsx": "^4.23.12",
-        "typescript": "^7.0.2",
-        "vite": "^8.2.1"
-    },
-    "dependencies": {
-        "js-base64": "^3.9.2",
-        "mime": "^4.1.0",
-        "preact": "^10.29.8"
-    }
+	"name": "convert2base64",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build && tsx scripts/prerender.tsx",
+		"preview": "vite preview",
+		"typecheck": "tsc --noEmit -p tsconfig.json"
+	},
+	"devDependencies": {
+		"@jsquash/avif": "^2.1.1",
+		"@keupoz/strict-queryselector": "^1.2.0",
+		"@preact/preset-vite": "^2.10.6",
+		"@types/node": "^26.2.0",
+		"preact-render-to-string": "^6.7.0",
+		"tsx": "^4.23.12",
+		"typescript": "^7.0.2",
+		"vite": "^8.2.1"
+	},
+	"dependencies": {
+		"js-base64": "^3.9.2",
+		"mime": "^4.1.0",
+		"preact": "^10.29.8"
+	}
 }
