@@ -1,6 +1,5 @@
 import { useState } from "preact/hooks";
 import { fromUint8Array } from "js-base64";
-import { mountApp } from "./shared";
 
 const AVIF_CDN = "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1";
 
@@ -92,5 +91,3 @@ export function EncodePage() {
 		</div>
 	</div>;
 }
-
-mountApp(<EncodePage />);

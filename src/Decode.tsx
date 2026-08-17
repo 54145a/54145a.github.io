@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
 import { decode as base64Decode, fromUint8Array, toUint8Array } from "js-base64";
 import mime from "mime";
-import { mountApp } from "./shared";
 
 function base64ToText(input: string): string {
 	return base64Decode(input);
@@ -114,5 +113,3 @@ export function DecodePage() {
 		{decoded && <DecodeResult decoded={decoded} onDownload={handleDownload} />}
 	</div>;
 }
-
-mountApp(<DecodePage />);

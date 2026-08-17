@@ -1,5 +1,3 @@
-import { mountApp } from "./shared";
-
 export function IndexPage() {
 	return <div>
 		<h1>Tools</h1>
@@ -9,5 +7,3 @@ export function IndexPage() {
 		</ul>
 	</div>;
 }
-
-mountApp(<IndexPage />);

@@ -9,8 +9,6 @@ export default defineConfig({
 		rollupOptions: {
 			input: {
 				index: "index.html",
-				encode: "encode.html",
-				decode: "decode.html",
 			},
 		},
 	},

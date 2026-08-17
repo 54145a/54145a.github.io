@@ -5,8 +5,9 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "vite build && tsx scripts/prerender.mjs",
-		"preview": "vite preview"
+		"build": "vite build && tsx prerender.tsx",
+		"preview": "vite preview",
+		"check": "tsc --noEmit"
 	},
 	"devDependencies": {
 		"@jsquash/avif": "^2.1.1",
