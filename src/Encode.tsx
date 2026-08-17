@@ -36,7 +36,7 @@ async function fileToAvifBytes(file: File): Promise<ArrayBuffer> {
 
 async function fileToShareUrl(file: File): Promise<string> {
 	const bytes = new Uint8Array(await fileToAvifBytes(file));
-	const url = new URL("decode.html", location.href);
+	const url = new URL("d.htm", location.href);
 	url.hash = `img=${fromUint8Array(bytes, true)}`;
 	return url.toString();
 }

@@ -6,7 +6,7 @@ import { App } from "./src/App";
 const routes = [
 	{ path: "/", file: "index.html", title: "54145a's Tools" },
 	{ path: "/encode.html", file: "encode.html", title: "Base64 Converter — Encode" },
-	{ path: "/decode.html", file: "decode.html", title: "Base64 Converter — Decode" },
+	{ path: "/d.htm", file: "d.htm", title: "Base64 Converter — Decode" },
 ];
 
 const template = readFileSync("docs/index.html", "utf-8");

@@ -23,7 +23,7 @@ function defaultName(mimeType: string): string {
 	return `decoded.${mime.getExtension(mimeType) ?? "bin"}`;
 }
 
-function FileResult({ decoded, onDownload }: { decoded: Decoded & { kind: "file" }; onDownload: (fileName: string) => void }) {
+function FileResult({ decoded, onDownload, shareMode }: { decoded: Decoded & { kind: "file" }; onDownload: (fileName: string) => void; shareMode: boolean }) {
 	const [fileName, setFileName] = useState(() => defaultName(decoded.mime));
 	const [asText, setAsText] = useState(false);
 	const url = useMemo(
@@ -35,24 +35,27 @@ function FileResult({ decoded, onDownload }: { decoded: Decoded & { kind: "file"
 	const dataUrl = `data:${decoded.mime};base64,${fromUint8Array(decoded.bytes, false)}`;
 	return <div>
 		{decoded.mime.startsWith("image/") && <img src={url} alt={decoded.mime} />}
-		<input value={fileName} onInput={e => setFileName(e.currentTarget.value)} placeholder="File name" />
-		<button onClick={() => onDownload(fileName)}>Download</button>
-		<button onClick={() => setAsText(t => !t)}>{asText ? "Show data URL" : "Decode as text"}</button>
-		<textarea readOnly value={asText ? text : dataUrl} />
+		{!shareMode && <>
+			<input value={fileName} onInput={e => setFileName(e.currentTarget.value)} placeholder="File name" />
+			<button onClick={() => onDownload(fileName)}>Download</button>
+			<button onClick={() => setAsText(t => !t)}>{asText ? "Show data URL" : "Decode as text"}</button>
+			<textarea readOnly value={asText ? text : dataUrl} />
+		</>}
 	</div>;
 }
 
-function DecodeResult({ decoded, onDownload }: { decoded: Decoded; onDownload: (fileName: string) => void }) {
+function DecodeResult({ decoded, onDownload, shareMode }: { decoded: Decoded; onDownload: (fileName: string) => void; shareMode: boolean }) {
 	if (decoded.kind === "text") {
 		return <div><textarea readOnly value={decoded.text} /></div>;
 	}
-	return <FileResult key={decoded.mime} decoded={decoded} onDownload={onDownload} />;
+	return <FileResult key={decoded.mime} decoded={decoded} onDownload={onDownload} shareMode={shareMode} />;
 }
 
 export function DecodePage() {
 	const [decoded, setDecoded] = useState<Decoded | null>(null);
 	const [input, setInput] = useState("");
 	const [error, setError] = useState<string | null>(null);
+	const [shareMode, setShareMode] = useState(false);
 
 	function handleDecode() {
 		const trimmed = input.trim();
@@ -90,6 +93,7 @@ export function DecodePage() {
 		function applyShareHash() {
 			const hash = location.hash;
 			if (hash.startsWith("#img=")) {
+				setShareMode(true);
 				const img = hash.slice("#img=".length);
 				const dataUrl = `data:image/avif;base64url,${img}`;
 				setInput(dataUrl);
@@ -110,6 +114,6 @@ export function DecodePage() {
 		<textarea placeholder="Paste base64, data URL, or share link" value={input} onInput={e => setInput(e.currentTarget.value)} />
 		<button onClick={handleDecode}>Decode</button>
 		{error && <p>{error}</p>}
-		{decoded && <DecodeResult decoded={decoded} onDownload={handleDownload} />}
+		{decoded && <DecodeResult decoded={decoded} onDownload={handleDownload} shareMode={shareMode} />}
 	</div>;
 }

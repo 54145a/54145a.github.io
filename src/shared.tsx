@@ -5,7 +5,7 @@ export function Nav() {
 	const links = [
 		{ href: "index.html", label: "Home" },
 		{ href: "encode.html", label: "Base64 Encode" },
-		{ href: "decode.html", label: "Base64 Decode" },
+		{ href: "d.htm", label: "Base64 Decode" },
 	];
 	return <nav>
 		{links.map((link, i) => <>
