@@ -9,8 +9,13 @@ lerna-debug.log*
 
 node_modules
 dist
+docs
 dist-ssr
 *.local
+
+# Tools
+.opencode
+.playwright-mcp
 
 # Editor directories and files
 .vscode/*
@@ -22,6 +27,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Playwright MCP
-.playwright-mcp
