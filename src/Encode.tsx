@@ -53,9 +53,8 @@ function CopyButton({ text, label }: { text: string; label: string }) {
 
 function FileEntry({ name, dataUrl, shareUrl }: { name: string; dataUrl: string; shareUrl: string | null }) {
 	return <details>
-		<summary>{name}</summary>
-		<code>{dataUrl}</code>
-		<CopyButton text={dataUrl} label="Copy Base64" />
+		<summary>{name} <CopyButton text={dataUrl} label="Copy Base64" /></summary>
+		{dataUrl.length > 500 ? <p>Too long to display</p> : <code>{dataUrl}</code>}
 		{shareUrl && <>
 			<p>Share URL (image only)</p>
 			<code>{shareUrl}</code>
@@ -71,7 +70,10 @@ export function EncodePage() {
 		const converted: Encoded[] = [];
 		for (const file of files) {
 			const dataUrl = await fileToDataUrl(file);
-			const shareUrl = file.type.startsWith("image/") ? await fileToShareUrl(file) : null;
+			let shareUrl: string | null = null;
+			if (file.type.startsWith("image/")) {
+				try { shareUrl = await fileToShareUrl(file); } catch {}
+			}
 			converted.push({ name: file.name, dataUrl, shareUrl });
 		}
 		setEntries(prev => [...prev, ...converted]);
