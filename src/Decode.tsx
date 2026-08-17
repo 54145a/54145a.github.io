@@ -2,6 +2,7 @@ import { render } from "preact";
 import { useEffect, useMemo, useState } from "preact/hooks";
 import { querySelector } from "@keupoz/strict-queryselector";
 import { decode as base64Decode, fromUint8Array, toUint8Array } from "js-base64";
+import mime from "mime";
 
 function base64ToText(input: string): string {
 	return base64Decode(input);
@@ -20,18 +21,8 @@ type Decoded =
 	| { kind: "text"; text: string }
 	| { kind: "file"; mime: string; bytes: Uint8Array<ArrayBuffer> };
 
-const EXT: Record<string, string> = {
-	"image/png": "png",
-	"image/jpeg": "jpg",
-	"image/gif": "gif",
-	"image/webp": "webp",
-	"image/avif": "avif",
-	"text/plain": "txt",
-	"application/pdf": "pdf",
-};
-
-function defaultName(mime: string): string {
-	return `decoded.${EXT[mime] ?? "bin"}`;
+function defaultName(mimeType: string): string {
+	return `decoded.${mime.getExtension(mimeType) ?? "bin"}`;
 }
 
 function FileResult({ decoded, onDownload }: { decoded: Decoded & { kind: "file" }; onDownload: (fileName: string) => void }) {
