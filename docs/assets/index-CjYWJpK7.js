@@ -1,0 +1,1 @@
+import{r as e,t}from"./shared--81L_v5x.js";function n(){return e(`div`,{children:[e(`h1`,{children:`Tools`}),e(`ul`,{children:[e(`li`,{children:[e(`a`,{href:`encode.html`,children:`Base64 Converter`}),` — Encode files to Base64 / Share URL`]}),e(`li`,{children:[e(`a`,{href:`decode.html`,children:`Base64 Decoder`}),` — Decode Base64 / data URLs`]})]})]})}t(e(n,{}));

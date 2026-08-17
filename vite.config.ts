@@ -8,7 +8,8 @@ export default defineConfig({
 		outDir: "docs",
 		rollupOptions: {
 			input: {
-				encode: "index.html",
+				index: "index.html",
+				encode: "encode.html",
 				decode: "decode.html",
 			},
 		},

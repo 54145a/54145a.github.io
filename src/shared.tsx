@@ -2,15 +2,20 @@ import type { VNode } from "preact";
 import { render } from "preact";
 
 export function Nav() {
-	const isEncode = typeof location !== "undefined"
-		? (location.pathname.includes("index") || location.pathname === "/")
-		: true;
+	const path = typeof location !== "undefined" ? location.pathname : "/";
+	const links = [
+		{ href: "index.html", label: "Home" },
+		{ href: "encode.html", label: "Encode" },
+		{ href: "decode.html", label: "Decode" },
+	];
 	return <nav>
-		<span>{isEncode ? "Encode" : "Decode"}</span>
-		{" → "}
-		<a href={isEncode ? "decode.html" : "index.html"}>
-			{isEncode ? "Decode" : "Encode"}
-		</a>
+		{links.map((link, i) => <>
+			{i > 0 && " | "}
+			{path.includes(link.href) || (path === "/" && link.href === "index.html")
+				? <strong>{link.label}</strong>
+				: <a href={link.href}>{link.label}</a>
+			}
+		</>)}
 	</nav>;
 }
 

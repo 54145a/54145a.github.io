@@ -4,24 +4,36 @@ import { renderToString } from "preact-render-to-string";
 import { readFileSync, writeFileSync } from "node:fs";
 import { EncodePage } from "../src/Encode";
 import { DecodePage } from "../src/Decode";
+import { IndexPage } from "../src/IndexPage";
 
-function Nav({ isEncode }: { isEncode: boolean }) {
+function Nav({ current }: { current: string }) {
+	const links = [
+		{ href: "index.html", label: "Home" },
+		{ href: "encode.html", label: "Encode" },
+		{ href: "decode.html", label: "Decode" },
+	];
 	return <nav>
-		<span>{isEncode ? "Encode" : "Decode"}</span>
-		{" → "}
-		<a href={isEncode ? "decode.html" : "index.html"}>
-			{isEncode ? "Decode" : "Encode"}
-		</a>
+		{links.map((link, i) => <>
+			{i > 0 && " | "}
+			{current === link.href
+				? <strong>{link.label}</strong>
+				: <a href={link.href}>{link.label}</a>
+			}
+		</>)}
 	</nav>;
 }
 
 const pages: Record<string, { component: JSX.Element; title: string }> = {
 	"/index.html": {
-		component: <><Nav isEncode={true} /><EncodePage /></>,
+		component: <><Nav current="index.html" /><IndexPage /></>,
+		title: "54145a's Tools",
+	},
+	"/encode.html": {
+		component: <><Nav current="encode.html" /><EncodePage /></>,
 		title: "Base64 Converter — Encode",
 	},
 	"/decode.html": {
-		component: <><Nav isEncode={false} /><DecodePage /></>,
+		component: <><Nav current="decode.html" /><DecodePage /></>,
 		title: "Base64 Converter — Decode",
 	},
 };
