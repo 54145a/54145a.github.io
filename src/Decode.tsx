@@ -95,14 +95,7 @@ export function DecodePage() {
 			if (hash.startsWith("#img=")) {
 				setShareMode(true);
 				const img = hash.slice("#img=".length);
-				const dataUrl = `data:image/avif;base64url,${img}`;
-				setInput(dataUrl);
-				try {
-					setDecoded({ kind: "file", ...dataUrlDecode(dataUrl) });
-					setError(null);
-				} catch (err) {
-					setError(err instanceof Error ? err.message : "Decode failed");
-				}
+				setInput(`data:image/avif;base64url,${img}`);
 			}
 		}
 		applyShareHash();
@@ -111,10 +104,8 @@ export function DecodePage() {
 	}, []);
 
 	return <div>
-		{!shareMode && <>
-			<textarea placeholder="Paste base64, data URL, or share link" value={input} onInput={e => setInput(e.currentTarget.value)} />
-			<button onClick={handleDecode}>Decode</button>
-		</>}
+		<textarea placeholder="Paste base64, data URL, or share link" value={input} onInput={e => setInput(e.currentTarget.value)} />
+		<button onClick={handleDecode}>Decode</button>
 		{error && <p>{error}</p>}
 		{decoded && <DecodeResult decoded={decoded} onDownload={handleDownload} shareMode={shareMode} />}
 	</div>;
