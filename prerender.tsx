@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { App } from "./src/App";
 
 const routes = [
-	{ path: "/", file: "index.html", title: "54145a's Tools" },
+	{ path: "/", file: "index.html", title: "145a's Tools" },
 	{ path: "/encode.html", file: "encode.html", title: "Base64 Converter — Encode" },
 	{ path: "/d.htm", file: "d.htm", title: "Base64 Converter — Decode" },
 ];
