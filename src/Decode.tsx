@@ -111,8 +111,10 @@ export function DecodePage() {
 	}, []);
 
 	return <div>
-		<textarea placeholder="Paste base64, data URL, or share link" value={input} onInput={e => setInput(e.currentTarget.value)} />
-		<button onClick={handleDecode}>Decode</button>
+		{!shareMode && <>
+			<textarea placeholder="Paste base64, data URL, or share link" value={input} onInput={e => setInput(e.currentTarget.value)} />
+			<button onClick={handleDecode}>Decode</button>
+		</>}
 		{error && <p>{error}</p>}
 		{decoded && <DecodeResult decoded={decoded} onDownload={handleDownload} shareMode={shareMode} />}
 	</div>;
