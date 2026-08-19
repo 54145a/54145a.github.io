@@ -59,6 +59,11 @@ export function DecodePage() {
 
 	function handleDecode() {
 		const trimmed = input.trim();
+		if (/^https?:\/\//.test(trimmed)) {
+			setError("Share URLs are not supported. Paste a Base64 string or data URL instead.");
+			setDecoded(null);
+			return;
+		}
 		try {
 			if (trimmed.startsWith("data:")) {
 				setDecoded({ kind: "file", ...dataUrlDecode(trimmed) });
@@ -104,7 +109,7 @@ export function DecodePage() {
 	}, []);
 
 	return <div>
-		<textarea placeholder="Paste base64, data URL, or share link" value={input} onInput={e => setInput(e.currentTarget.value)} />
+		<textarea placeholder="Paste Base64 string or data URL" value={input} onInput={e => setInput(e.currentTarget.value)} />
 		<button onClick={handleDecode}>Decode</button>
 		{error && <p>{error}</p>}
 		{decoded && <DecodeResult decoded={decoded} onDownload={handleDownload} shareMode={shareMode} />}

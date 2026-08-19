@@ -56,13 +56,14 @@ const DISPLAY_LIMIT = 10000;
 function EncodedOutput({ type, value }: { type: string; value: string }) {
 	return <>
 		<CopyButton text={value} label={`Copy ${type}`} />
-		{value.length > DISPLAY_LIMIT ? <p>Too long to display</p> : <code style="word-break:break-all">{value}</code>}
 	</>;
 }
 
 function FileEntry({ name, dataUrl, shareUrl }: { name: string; dataUrl: string; shareUrl: string | null }) {
 	return <details>
 		<summary>{name} <EncodedOutput type="Base64" value={dataUrl} />{shareUrl && <EncodedOutput type="Share URL" value={shareUrl} />}</summary>
+		{dataUrl.length > DISPLAY_LIMIT ? <p>Too long to display</p> : <code style="word-break:break-all">{dataUrl}</code>}
+		{shareUrl && <code style="word-break:break-all">{shareUrl}</code>}
 	</details>;
 }
 
