@@ -21,6 +21,7 @@
 	},
 	"dependencies": {
 		"js-base64": "^3.9.2",
+		"marked": "^18.0.10",
 		"mime": "^4.1.0",
 		"preact": "^10.29.8",
 		"preact-iso": "^2.12.2"
