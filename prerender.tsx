@@ -1,7 +1,6 @@
 import { prerender } from "preact-iso";
 import { locationStub } from "preact-iso/prerender";
 import { readFileSync, writeFileSync } from "node:fs";
-import { marked } from "marked";
 import { App } from "./src/App";
 
 const routes = [
@@ -10,7 +9,6 @@ const routes = [
 	{ path: "/d.htm", file: "d.htm", title: "Base64 Converter — Decode", desc: "Decode Base64 strings, data URLs, and shared image links back to files." },
 ];
 
-const readmeHtml = marked.parse(readFileSync("54145a/README.md", "utf-8")) as string;
 const template = readFileSync("docs/index.html", "utf-8");
 
 for (const { path, file, title, desc } of routes) {
@@ -19,8 +17,7 @@ for (const { path, file, title, desc } of routes) {
 	const out = template
 		.replace('<div id="app">', `<div id="app">${html}`)
 		.replace(/<title>.*?<\/title>/, `<title>${title}</title>`)
-		.replace(/<meta name="description" content=".*?" \/>/, `<meta name="description" content="${desc}" />`)
-		.replace(/<span id="readme"><\/span>/, readmeHtml);
+		.replace(/<meta name="description" content=".*?" \/>/, `<meta name="description" content="${desc}" />`);
 	writeFileSync(`docs/${file}`, out);
 	console.log(`SSG: docs/${file} (${html.length} bytes)`);
 }

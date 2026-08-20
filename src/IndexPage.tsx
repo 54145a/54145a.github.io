@@ -5,6 +5,5 @@ export function IndexPage() {
 			<li><a href="encode.html">Base64 Converter</a> — Encode files to Base64 / Share URL</li>
 			<li><a href="d.htm">Base64 Decoder</a> — Decode Base64 / data URLs</li>
 		</ul>
-		<span id="readme" />
 	</div>;
 }
