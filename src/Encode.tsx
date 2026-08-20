@@ -1,4 +1,5 @@
 import { useState } from "preact/hooks";
+import { useTitle, useMeta } from "hoofd/preact";
 import { fromUint8Array } from "js-base64";
 
 const AVIF_CDN = "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1";
@@ -68,6 +69,8 @@ function FileEntry({ name, dataUrl, shareUrl }: { name: string; dataUrl: string;
 }
 
 export function EncodePage() {
+	useTitle("Base64 Converter — Encode");
+	useMeta({ name: "description", content: "Encode files to Base64 data URLs and generate shareable image links." });
 	const [entries, setEntries] = useState<Encoded[]>([]);
 
 	async function handleInput(files: File[]) {

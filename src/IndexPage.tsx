@@ -1,4 +1,8 @@
+import { useTitle, useMeta } from "hoofd/preact";
+
 export function IndexPage() {
+	useTitle("145a's Tools");
+	useMeta({ name: "description", content: "Online tools for Base64 encoding, decoding, and shareable links." });
 	return <div>
 		<h1>Tools</h1>
 		<ul>

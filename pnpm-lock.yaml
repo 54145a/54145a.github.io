@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      hoofd:
+        specifier: ^1.7.3
+        version: 1.7.3(react@19.2.8)
       js-base64:
         specifier: ^3.9.2
         version: 3.9.2
@@ -678,6 +681,11 @@ packages:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
 
+  hoofd@1.7.3:
+    resolution: {integrity: sha512-ssVCn3i3w97C4ubB6Xf4oGbil5lj/r9rn7ZRlY5p1JmLa6i7ZviCk9Huo9WDK2OvP6K7HTga5+SRnw07e2uKOw==}
+    peerDependencies:
+      react: '>= 16.8.0'
+
   js-base64@3.9.2:
     resolution: {integrity: sha512-6zayE8QlUdiweYI6cETD/XBSqFcoCUlufn/29PJR99r82x1yDnIprRca0YvAYpAW+ez0GuQkVBC6xG5QkD7OjA==}
 
@@ -838,6 +846,10 @@ packages:
     peerDependenciesMeta:
       preact-render-to-string:
         optional: true
+
+  react@19.2.8:
+    resolution: {integrity: sha512-PWaYA1L/q9u2u7xYQi+Y3L3Yfnie7XyLeaJICV1MGD6LprsBxcAqGjYyr0eY3p+QdsA+x/Irkt4Qif8D63+Sbw==}
+    engines: {node: '>=0.10.0'}
 
   rolldown@1.2.4:
     resolution: {integrity: sha512-rSr7irW0K7QRWzjdJXqZowkcRdDtjRduh43rBltnVKd0VFq839l1lJoDvGJb6gl7+4rTTCrPWu+YfujUL8Ug7w==}
@@ -1446,6 +1458,10 @@ snapshots:
 
   he@1.2.0: {}
 
+  hoofd@1.7.3(react@19.2.8):
+    dependencies:
+      react: 19.2.8
+
   js-base64@3.9.2: {}
 
   js-tokens@4.0.0: {}
@@ -1556,6 +1572,8 @@ snapshots:
   preact@10.29.8(preact-render-to-string@6.7.0):
     optionalDependencies:
       preact-render-to-string: 6.7.0(preact@10.29.8)
+
+  react@19.2.8: {}
 
   rolldown@1.2.4:
     dependencies:

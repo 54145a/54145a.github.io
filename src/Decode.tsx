@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
+import { useTitle, useMeta } from "hoofd/preact";
 import { decode as base64Decode, fromUint8Array, toUint8Array } from "js-base64";
 import mime from "mime";
 
@@ -52,6 +53,8 @@ function DecodeResult({ decoded, onDownload, shareMode }: { decoded: Decoded; on
 }
 
 export function DecodePage() {
+	useTitle("Base64 Converter — Decode");
+	useMeta({ name: "description", content: "Decode Base64 strings, data URLs, and shared image links back to files." });
 	const [decoded, setDecoded] = useState<Decoded | null>(null);
 	const [input, setInput] = useState("");
 	const [error, setError] = useState<string | null>(null);
